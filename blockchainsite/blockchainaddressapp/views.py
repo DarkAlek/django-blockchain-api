@@ -1,6 +1,7 @@
 import json
 import urllib3
 import datetime
+import pytz
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
@@ -43,7 +44,7 @@ class AddressView(ListView):
                 #here calculations
                 for t in transactions:
                     hash_id = t['hash']
-                    date = datetime.datetime.fromtimestamp(t['time'])
+                    date = datetime.datetime.utcfromtimestamp(t['time'])
                     value = self.count_value(t, address)
                     db_transaction = Transaction(address=db_address, hash_id=hash_id, value=value, date=date)
                     db_transaction.save()
@@ -61,7 +62,6 @@ class AddressView(ListView):
     def count_value(self, transaction, address):
         inputs = transaction['inputs']
         out = transaction['out']
-        print(out)
         address_inputs = [x['prev_out']['addr'] for x in inputs]
 
         if address in address_inputs:
