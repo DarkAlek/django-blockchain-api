@@ -61,14 +61,15 @@ class AddressView(ListView):
     def count_value(self, transaction, address):
         inputs = transaction['inputs']
         out = transaction['out']
+        print(out)
         address_inputs = [x['prev_out']['addr'] for x in inputs]
 
         if address in address_inputs:
-            amount = sum([x['value'] for x in out if  x['addr'] != address])
+            amount = sum([x['value'] for x in out if x['value'] != 0 and x['addr'] != address])
             total_input = sum([x['prev_out']['value'] for x in inputs]) 
             total_output  = sum([x['value'] for x in out])
             value = -(amount + total_input - total_output)
         else:
-            amount = sum([x['value'] for x in out if x['addr'] == address])
+            amount = sum([x['value'] for x in out if x['value'] != 0 and x['addr'] == address])
             value = amount   
         return value
