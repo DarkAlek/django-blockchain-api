@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load app_filters %}
+
+{% block content %}
+    <form id="address_form" action="/" method="get">
+        <label for="address_title">Address:</label>
+        <input type="text" name="address" maxlength="200" required id="id_address" />
+        <input type="submit" value="Submit" />
+    </form>
+    {% if transactions %}
+        <h3>Transactions:</h3>
+        <ul>
+        {% for t in transactions %}
+            <li>hash_id: {{t.hash_id}}, value: {{t.value|btc_human_read}}, date: {{t.date|data_format}}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Invalid bitcoin address</p>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blockchain Info</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+    {% block content %}{% endblock content %}
+    </body>
+
+    <script type="text/javascript">
+        $( "#address_form" ).submit(function( event ) {
+            event.preventDefault();
+            location.href = "/" + $( "input:first" ).val().trim() 
+        });  
+    </script>
+</html>
