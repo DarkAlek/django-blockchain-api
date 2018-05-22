@@ -68,6 +68,7 @@ class AddressView(ListView):
         queryset = Transaction.objects.filter(address__address=address_param)
         if len(queryset) != 0:
             queryset = self.filter_date(queryset, datetime_start, datetime_end)
+            print(queryset)
             return queryset
         else:
             queryset = self.get_transactions(address_param)
