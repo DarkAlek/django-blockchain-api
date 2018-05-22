@@ -6,12 +6,14 @@
 </form>
 <form id="address_form" action="/" method="get">
     <label for="address_title">Address:</label>
-    <input type="text" name="address" maxlength="34" required id="id_address" />
+    <input type="text" name="address" maxlength="34" required id="id_address" pattern="[0-9a-zA-Z]{27,34}"/>
     <br>
     <label for="address_title">From:</label>
-    <input type="text" name="from_date" maxlength="20" id="id_from_date" placeholder="2018-05-21" pattern="[0-9]{4}[-][0-9]{2}[-][0-9]{2}"/>
+    <input type="text" name="from_date" maxlength="20" id="id_from_date" placeholder="YYYY-MM-DD" 
+            pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" />
     <label for="address_title">To:</label>
-    <input type="text" name="to_date" maxlength="20" id="id_to_date" placeholder="2018-05-21" pattern="[0-9]{4}[-][0-9]{2}[-][0-9]{2}"/>
-    <input type="submit" value="Submit" />
+    <input type="text" name="to_date" maxlength="20" id="id_to_date" placeholder="YYYY-MM-DD" 
+            pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" />
+    <input type="submit" value="Search" />
 </form>
 {% endblock content %}

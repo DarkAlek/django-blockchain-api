@@ -1,4 +1,5 @@
 import json
+import re
 import urllib3
 import datetime
 import pytz
@@ -40,6 +41,11 @@ class AddressView(ListView):
                 context['total_value'] = -negative_sum
             else:
                 context['total_value'] = 0
+            context['address'] = self.kwargs['address_id']
+            if self.request.GET.get('start', None) is not None:
+                context['start_date'] =  self.request.GET.get('start', None)
+            if self.request.GET.get('end', None) is not None:
+                context['end_date'] = self.request.GET.get('end', None)
             return context
 
     def get_queryset(self):
@@ -51,12 +57,12 @@ class AddressView(ListView):
         if start_date is not None:
             try:
                 datetime_start = datetime.date(*(int(x) for x in start_date.split('-')))
-            except ValueError:
+            except:
                 datetime_start = None
         if end_date is not None:
             try:
                 datetime_end = datetime.date(*(int(x) for x in end_date.split('-'))) + datetime.timedelta(days=1)
-            except ValueError:
+            except:
                 datetime_end = None
         #print(start_date.split('-'), end_date.split('-'))
         queryset = Transaction.objects.filter(address__address=address_param)
@@ -132,9 +138,13 @@ class QrCodeView(TemplateView):
         context = super(QrCodeView, self).get_context_data(**kwargs)
         address = self.request.GET.get('address', None)
         if address is not None:
+            m = re.match('[0-9a-zA-Z]{27,34}', address)
+            if m is None:
+                return None
             img = qrcode.make(address)
             buffered = BytesIO()
             img.save(buffered, format="JPEG")
             img_str = base64.b64encode(buffered.getvalue())
             context['qrcode'] =  img_str.decode('utf-8')
+            context['address'] = address
             return context
