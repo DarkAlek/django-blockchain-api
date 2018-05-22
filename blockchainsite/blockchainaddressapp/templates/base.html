@@ -10,9 +10,33 @@
     </body>
 
     <script type="text/javascript">
-        $( "#address_form" ).submit(function( event ) {
+        $("#address_form").submit(function( event ) {
             event.preventDefault();
-            location.href = "/" + $( "input:first" ).val().trim() 
-        });  
+            
+            if($("#id_from_date").val().length != 0 || $("#id_to_date").val().length != 0){
+                if($("#id_from_date").val().length != 0 && $("#id_to_date").val().length != 0){
+                    location.href = "/" + $("#id_address").val().trim() + 
+                                    '?start=' + $("#id_from_date").val().trim() +
+                                    '&end=' + $("#id_to_date").val().trim()
+                }
+                else if($("#id_from_date").val().length != 0){
+                    location.href = "/" + $("#id_address").val().trim() + 
+                                    '?start=' + $("#id_from_date").val().trim()
+                }
+                else{
+                    location.href = "/" + $("#id_address").val().trim() + 
+                                    '?end=' + $("#id_to_date").val().trim()
+                }  
+            }
+            else{
+                location.href = "/" + $("#id_address").val().trim()
+            }
+        }); 
+    </script>
+    <script type="text/javascript">
+        $("#qrcode_form").submit(function( event ) {
+            event.preventDefault();
+            location.href = "/qrcode?address=" + $("#id_address").val().trim()
+        }); 
     </script>
 </html>

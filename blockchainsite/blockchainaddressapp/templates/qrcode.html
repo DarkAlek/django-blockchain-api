@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load app_filters %}
+
+{% block content %}
+    <form id="qrcode_form" action="/" method="get">
+        <label for="address_title">Address:</label>
+        <input type="text" name="address" maxlength="34" required id="id_address" />
+        <input type="submit" value="Submit" />
+    </form>
+    {% if qrcode %}
+        <img src="data:image/png;base64, {{qrcode}}"/>
+    {% endif %}
+{% endblock content %}
