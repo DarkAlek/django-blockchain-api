@@ -3,13 +3,13 @@
 
 {% block content %}
     <form action="/">
-        <input type="submit" value="Back" />
+        <input type="submit" value="Back" class="btn btn-success" style="margin:5px" />
     </form>
-    <form id="qrcode_form" action="/" method="get">
+    <form id="qrcode_form" action="/" method="get" class="form-inline" style="margin:5px">
         <label for="address_title">Address:</label>
-        <input type="text" name="address" maxlength="34" required id="id_address" pattern="[0-9a-zA-Z]{27,34}" 
+        <input type="text" name="address" maxlength="34" class="form-control" style="width:350px;margin:5px" required id="id_address" pattern="[0-9a-zA-Z]{27,34}" 
                 value="{{address}}"/>
-        <input type="submit" value="Generate QR" />
+        <input type="submit" value="Generate QR" class="btn btn-primary" />
     </form>
     {% if qrcode %}
         <img src="data:image/png;base64, {{qrcode}}"/>
