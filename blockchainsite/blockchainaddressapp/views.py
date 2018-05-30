@@ -108,7 +108,7 @@ class AddressView(ListView):
     def count_value(self, transaction, address):
         inputs = transaction['inputs']
         out = transaction['out']
-        address_inputs = [x['prev_out']['addr'] for x in inputs]
+        address_inputs = [x['prev_out']['addr'] for x in inputs if 'prev_out' in x.keys()]
 
         if address in address_inputs:
             amount = sum([x['value'] for x in out if x['value'] != 0 and x['addr'] != address])
