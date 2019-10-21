@@ -3,5 +3,5 @@ Pillow==5.1.0
 pytz==2018.4
 qrcode==6.0
 six==1.11.0
-urllib3==1.22
+urllib3==1.24.2
 gunicorn==19.7.1
