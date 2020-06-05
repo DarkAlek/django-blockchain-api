@@ -1,4 +1,4 @@
-Django==2.0.12
+Django==2.2.13
 Pillow==6.2.0
 pytz==2018.4
 qrcode==6.0
